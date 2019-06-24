@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 List<CameraDescription> cameras;
 
@@ -40,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
           body: TabBarView(children: <Widget>[
             HomePage(),
             SearchPage(),
-            Center(child:Text('YOUR GALLERY')),
+            Center(child: Text('YOUR GALLERY')),
             LikesPage(),
             Container(
               color: Colors.blueGrey,
@@ -82,7 +83,6 @@ class CameraPage extends StatefulWidget {
 
 class _CameraPageState extends State<CameraPage> {
   CameraController controller;
-
   @override
   void initState() {
     super.initState();
@@ -106,7 +106,7 @@ class _CameraPageState extends State<CameraPage> {
     if (!controller.value.isInitialized) {
       return Container();
     }
-    return Container(child: CameraPreview(controller));
+    return AspectRatio(child: Container(child: CameraPreview(controller)), aspectRatio: controller.value.aspectRatio,);
   }
 }
 
@@ -568,6 +568,192 @@ class _HomePageState extends State<HomePage> {
 }
 
 class SearchPage extends StatelessWidget {
+  final List<StaggeredTile> _staggeredTiles = <StaggeredTile>[
+    StaggeredTile.count(1, 1),
+    StaggeredTile.count(2, 2),
+    StaggeredTile.count(1, 1),
+    StaggeredTile.count(1, 1),
+    StaggeredTile.count(1, 1),
+    StaggeredTile.count(1, 1),
+    StaggeredTile.count(1, 1),
+    StaggeredTile.count(1, 1),
+    StaggeredTile.count(2, 2),
+    StaggeredTile.count(1, 1),
+    StaggeredTile.count(1, 1),
+    StaggeredTile.count(1, 1),
+  ];
+
+  final List<Widget> _tiles = <Widget>[
+    Card(
+      color: Colors.black.withOpacity(0.2),
+      child: InkWell(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.all(4.0),
+            child: Icon(
+              Icons.camera_enhance,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
+    ),
+    Card(
+      color: Colors.black.withOpacity(0.2),
+      child: InkWell(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.all(4.0),
+            child: Icon(
+              Icons.camera_enhance,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
+    ),
+    Card(
+      color: Colors.black.withOpacity(0.2),
+      child: InkWell(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.all(4.0),
+            child: Icon(
+              Icons.camera_enhance,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
+    ),
+    Card(
+      color: Colors.black.withOpacity(0.2),
+      child: InkWell(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.all(4.0),
+            child: Icon(
+              Icons.camera_enhance,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
+    ),
+    Card(
+      color: Colors.black.withOpacity(0.2),
+      child: InkWell(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.all(4.0),
+            child: Icon(
+              Icons.camera_enhance,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
+    ),
+    Card(
+      color: Colors.black.withOpacity(0.2),
+      child: InkWell(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.all(4.0),
+            child: Icon(
+              Icons.camera_enhance,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
+    ),
+    Card(
+      color: Colors.black.withOpacity(0.2),
+      child: InkWell(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.all(4.0),
+            child: Icon(
+              Icons.camera_enhance,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
+    ),
+    Card(
+      color: Colors.black.withOpacity(0.2),
+      child: InkWell(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.all(4.0),
+            child: Icon(
+              Icons.camera_enhance,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
+    ),
+    Card(
+      color: Colors.black.withOpacity(0.2),
+      child: InkWell(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.all(4.0),
+            child: Icon(
+              Icons.camera_enhance,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
+    ),
+    Card(
+      color: Colors.black.withOpacity(0.2),
+      child: InkWell(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.all(4.0),
+            child: Icon(
+              Icons.camera_enhance,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
+    ),
+    Card(
+      color: Colors.black.withOpacity(0.2),
+      child: InkWell(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.all(4.0),
+            child: Icon(
+              Icons.camera_enhance,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
+    ),
+    Card(
+      color: Colors.black.withOpacity(0.2),
+      child: InkWell(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.all(4.0),
+            child: Icon(
+              Icons.camera_enhance,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -580,7 +766,10 @@ class SearchPage extends StatelessWidget {
                 color: Colors.black,
               ),
               onPressed: () {
-                Navigator.push(context, CupertinoPageRoute(builder: (context)=> SearchPageContent()));
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                        builder: (context) => SearchPageContent()));
               }),
           Expanded(
             child: TextFormField(
@@ -597,8 +786,17 @@ class SearchPage extends StatelessWidget {
               onPressed: () {})
         ],
       ),
-      body: Container(
-        color: Colors.orangeAccent,
+      body: Padding(
+        padding: EdgeInsets.only(top: 15.0),
+        child: StaggeredGridView.count(
+          crossAxisCount: 3,
+          staggeredTiles: _staggeredTiles,
+          children: _tiles,
+          mainAxisSpacing: 3,
+          crossAxisSpacing: 3,
+          scrollDirection: Axis.vertical,
+          padding: EdgeInsets.all(4.0),
+        )
       ),
     );
   }
@@ -614,23 +812,40 @@ class SearchPageContent extends StatelessWidget {
           bottom: TabBar(
             tabs: <Widget>[
               Tab(
-                child: Text('TOP',style: TextStyle(fontSize: 10.0,color: Colors.black),),
+                child: Text(
+                  'TOP',
+                  style: TextStyle(fontSize: 10.0, color: Colors.black),
+                ),
               ),
               Tab(
-                child: Text('ACCOUNTS',style: TextStyle(fontSize: 10.0,color: Colors.black),),
+                child: Text(
+                  'ACCOUNTS',
+                  style: TextStyle(fontSize: 10.0, color: Colors.black),
+                ),
               ),
               Tab(
-                child: Text('TAGS',style: TextStyle(fontSize: 10.0,color: Colors.black),),
+                child: Text(
+                  'TAGS',
+                  style: TextStyle(fontSize: 10.0, color: Colors.black),
+                ),
               ),
               Tab(
-                child: Text('PLACES',style: TextStyle(fontSize: 10.0,color: Colors.black),),
+                child: Text(
+                  'PLACES',
+                  style: TextStyle(fontSize: 10.0, color: Colors.black),
+                ),
               )
             ],
           ),
           actions: <Widget>[
-            IconButton(icon: Icon(Icons.arrow_back,color: Colors.black,), onPressed: (){
-              Navigator.pop(context);
-            }),
+            IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
             Expanded(
               child: TextFormField(
                 decoration: InputDecoration(labelText: 'Search'),
@@ -658,8 +873,7 @@ class SearchPageContent extends StatelessWidget {
   }
 }
 
-
-class LikesPage extends StatelessWidget{
+class LikesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -667,23 +881,39 @@ class LikesPage extends StatelessWidget{
         child: Scaffold(
           appBar: TabBar(tabs: [
             Padding(
-              padding: EdgeInsets.only(top:35.0),
-              child: Tab(child: Text('FOLLOWING',style: TextStyle(fontSize: 10.0,color: Colors.black),)),
+              padding: EdgeInsets.only(top: 35.0),
+              child: Tab(
+                  child: Text(
+                'FOLLOWING',
+                style: TextStyle(fontSize: 10.0, color: Colors.black),
+              )),
             ),
             Padding(
-              padding: const EdgeInsets.only(top:35.0),
-              child: Tab(child: Text('YOU',style: TextStyle(fontSize: 10.0,color: Colors.black),),),
+              padding: const EdgeInsets.only(top: 35.0),
+              child: Tab(
+                child: Text(
+                  'YOU',
+                  style: TextStyle(fontSize: 10.0, color: Colors.black),
+                ),
+              ),
             )
-          ])
-        ,
+          ]),
           body: TabBarView(
             children: <Widget>[
-              Center(child: Text('FOLLOWING',style: TextStyle(fontSize: 10.0,color: Colors.black),),),
-              Center(child: Text('YOU',style: TextStyle(fontSize: 10.0,color: Colors.black),),)
+              Center(
+                child: Text(
+                  'FOLLOWING',
+                  style: TextStyle(fontSize: 10.0, color: Colors.black),
+                ),
+              ),
+              Center(
+                child: Text(
+                  'YOU',
+                  style: TextStyle(fontSize: 10.0, color: Colors.black),
+                ),
+              )
             ],
           ),
-        )
-    );
+        ));
   }
-
 }
